@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Solfege</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/✅"/>
+</head>
+<body>
+    <h1 style="color:white; -webkit-text-stroke: 1px black;">The 7 Musical Notes</h1>
+    <h1 style="color:white; -webkit-text-stroke: 1px black;">Solf&egravege</h1>
+    <div class="keys">
+      <div data-key="68" class="key">
+        <kbd>DO</kbd>
+        <span class="sound">PRESS D</span>
+      </div>
+      <div data-key="82" class="key">
+        <kbd>RE</kbd>
+        <span class="sound">PRESS R</span>
+      </div>
+      <div data-key="77" class="key">
+        <kbd>MI</kbd>
+        <span class="sound">PRESS M</span>
+      </div>
+      <div data-key="70" class="key">
+        <kbd>FA</kbd>
+        <span class="sound">PRESS F</span>
+      </div>
+      <div data-key="83" class="key">
+        <kbd>SO</kbd>
+        <span class="sound">PRESS S</span>
+      </div>
+      <div data-key="76" class="key">
+        <kbd>LA</kbd>
+        <span class="sound">PRESS L</span>
+      </div>
+      <div data-key="84" class="key">
+        <kbd>TI</kbd>
+        <span class="sound">PRESS T</span>
+      </div>
+      <div data-key="65" class="key">
+        <kbd>ALL</kbd>
+        <span class="sound">PRESS A</span>
+      </div>
+    </div>
+  
+    <!-- DO-68 RE-82 MI-77 FA-70 SO-83 LA-76 TI-84 DA-68 -->
+    <audio data-key="68" src="sounds/do.mp3"></audio>
+    <audio data-key="82" src="sounds/re.mp3"></audio>
+    <audio data-key="77" src="sounds/mi.mp3"></audio>
+    <audio data-key="70" src="sounds/fa.mp3"></audio>
+    <audio data-key="83" src="sounds/so.mp3"></audio>
+    <audio data-key="76" src="sounds/la.mp3"></audio>
+    <audio data-key="84" src="sounds/ti.mp3"></audio>
+    <audio data-key="65" src="sounds/all.mp3"></audio>
+  
+
+<script>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+</body>
+</html>
+
+
